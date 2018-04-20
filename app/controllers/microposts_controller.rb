@@ -1,5 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user,  only: :desroy
 
   def create
       @microposts = current_user.microposts.build(microposts_params)
@@ -12,6 +13,8 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    @micropost.desroy
+    redirect_to root_url
   end
   
   private
@@ -20,4 +23,8 @@ class MicropostsController < ApplicationController
       params.require(:microposts).permit(:contact)
   end
      
+     def correct_user
+       @micropost = current_user.microposts.find_by(id: params[:id])
+       redirect_to root_url if @micropost.nil?
+     end
 end
