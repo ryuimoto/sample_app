@@ -15,14 +15,18 @@
 <% if signed_in? %>
   <div class="row">
     <aside class="col-md-4">
+    </aside>
+  </div>
+  
       <section>
-        <%= render 'devise/shared/user_info' %>
+        <%= render 'devise/shared/user_info/' %>
+      </section>
+      <section>
+        <%= render 'devise/shared/stats' %>
       </section>
       <section>
         <%= render 'devise/shared/micropost_form' %>
       </section>
-    </aside>
-  </div>
   
   <div class="col-md-8">
   <h3>Micropost Feed</h3>

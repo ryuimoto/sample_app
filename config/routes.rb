@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {
     :registrations => "registrations"
   }
-  resources :users, only: [:show, :edit, :index, :destory]
+  resources :users, only: [:show, :edit, :index, :destory] do
+    member do
+      get :following, :followers
+    end
+  end
+  
+  resources :microposts,    only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
+  
   resources :microposts, only:[:create, :destroy]
   root  'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
