@@ -16,6 +16,10 @@ def feed
   Micropost.where("user_id = ?", id)
 end
 
+def feed
+  Micropost.from_users_followed_by(self)
+end
+
 def following?(other_user)
   relationships.find_by(followed_id: other_user.id)
 end
